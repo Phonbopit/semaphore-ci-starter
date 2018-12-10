@@ -9,11 +9,14 @@ blocks:
     task:
       secrets:
         - name: firebase-secret
+      prologue:
+        commands:
+          - checkout
+          - cache restore node-modules-$SEMAPHORE_GIT_BRANCH-$(checksum package-lock.json),node-modules-$SEMAPHORE_GIT_BRANCH,node-modules-master
       jobs:
         - name: Staging
           commands:
             - npm install -g firebase-tools
-            - checkout
             - npm run build
             - firebase use sleepfins --token $FIREBASE_TOKEN
             - firebase deploy --only hosting --non-interactive --token $FIREBASE_TOKEN
