@@ -3,7 +3,7 @@
 
 1. Install dependencies and cache
 2. Running lint and test
-3. If all test passed we deploy to hosting (Firebase hosting)
+3. If all test passed we deploy to hosting (Firebase hosting) with specific branch ex. `develop`
 4. We use `sem secret` for environment variables (firebase token)
 
 ## Usage
