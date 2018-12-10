@@ -1,0 +1,19 @@
+version: v1.0
+name: Promotions and Auto-promotions
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Deploy
+    task:
+      secrets:
+        - name: firebase-secret
+      jobs:
+        - name: Staging
+          commands:
+            - npm install -g firebase-tools
+            - checkout
+            - npm run build
+            - firebase use sleepfins --token $FIREBASE_TOKEN
+            - firebase deploy --only hosting --non-interactive --token $FIREBASE_TOKEN
